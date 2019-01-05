@@ -7,11 +7,13 @@ import (
 )
 
 func main() {
-	// test("kareem")
-	// test("a")
-	// test("aba")
+	test("kareem")
+	test("a")
+	test("aba")
+	test("abca")
+	test("abba")
 	test("abbaaa")
-	// test("")
+	test("")
 }
 
 func test(s string) {
@@ -26,20 +28,21 @@ func isPalindrome(l *node) bool {
 	}
 	slow, fast := l, l
 	var runeStack stack
+	runeStack.push(slow.Val)
 	for fast != nil && fast.Next != nil {
-		runeStack.push(slow.Val)
 		fast = fast.Next.Next
 		slow = slow.Next
+		runeStack.push(slow.Val)
 	}
 	if fast == nil {
 		runeStack.pop()
 	}
-	for slow.Next != nil {
-		slow = slow.Next
+	for slow != nil {
 		val, ok := runeStack.pop()
 		if !ok || val != slow.Val {
 			return false
 		}
+		slow = slow.Next
 	}
 	return runeStack.isEmpty()
 }

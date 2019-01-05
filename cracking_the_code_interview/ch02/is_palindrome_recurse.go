@@ -35,11 +35,11 @@ func isPalindromeHelper(n *node, l int) (*node, bool) {
 	} else if l == 1 {
 		return n.Next, true
 	}
-	head, status := isPalindromeHelper(n.Next, l-2)
-	if !status || head.Val != n.Val {
+	tail, status := isPalindromeHelper(n.Next, l-2)
+	if !status || tail.Val != n.Val {
 		return nil, false
 	}
-	return head.Next, true
+	return tail.Next, true
 }
 
 func listLen(n *node) int {
